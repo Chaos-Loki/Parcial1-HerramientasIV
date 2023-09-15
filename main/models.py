@@ -1,3 +1,8 @@
+# Diferentes tablas para las diferentes secciones
+# del blog.
+# siempre en su argumento debe decir models.model
+# NO MODIFICAR, UTILIZAR
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify

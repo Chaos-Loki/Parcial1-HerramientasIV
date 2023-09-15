@@ -17,8 +17,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from django.shortcuts import redirect
-
-
+from django.views.decorators.cache import cache_control
 
 def registerPage(request):
 	if request.user.is_authenticated:
@@ -60,6 +59,11 @@ def loginPage(request):
 def logoutUser(request):
 	logout(request)
 	return redirect('main:login')
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url='main:login')
+def blogCreatePage(request):
+		return render(request, "main/blog-create.html")
 
 
 
@@ -113,7 +117,9 @@ class BlogView(generic.ListView):
 	def get_queryset(self):
 		return super().get_queryset().filter(is_active=True)
 
-
 class BlogDetailView(generic.DetailView):
 	model = Blog
 	template_name = "main/blog-detail.html"
+
+
+
