@@ -5,8 +5,6 @@ from .models import ContactProfile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-
-
 class ContactForm(forms.ModelForm):
 
 	name = forms.CharField(max_length=100, required=True,
@@ -32,3 +30,21 @@ class CreateUserForm(UserCreationForm):
 	class Meta:
 		model = User
 		fields = ['username','email','password1','password2']
+
+# class BLogForm(forms.ModelForm):
+
+# 	name = forms.CharField(max_length=150, required=True,
+# 		widget=forms.TextInput(attrs={
+# 			'placeholder': '*Titulo..',
+# 			}))
+
+# 	message = forms.CharField(max_length=1000, required=True, 
+# 		widget=forms.Textarea(attrs={
+# 			'placeholder': '*Message..',
+# 			'rows': 6,
+# 			}))
+
+
+# 	class Meta:
+# 		model = ContactProfile
+# 		fields = ('name', 'email', 'message',)
