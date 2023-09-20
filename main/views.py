@@ -19,6 +19,8 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.views.decorators.cache import cache_control
 
+from .forms import BlogPostForm
+
 def registerPage(request):
 	if request.user.is_authenticated:
 		return redirect("main:home")
@@ -62,8 +64,22 @@ def logoutUser(request):
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url='main:login')
+
 def blogCreatePage(request):
 		return render(request, "main/blog-create.html")
+
+
+def crear_entrada_de_blog(request):
+    if request.method == 'POST':
+        form = BlogPostForm(request.POST)
+        if form.is_valid():
+            # Guarda la entrada de blog en la base de datos
+            entrada = form.save()
+            return redirect('nombre_de_la_vista_de_detalle', entrada.id)  # Redirige a la página de detalle de la entrada
+    else:
+        form = BlogPostForm()
+    
+    return render(request, 'main/BlogPostForm.html', {'form': form})
 
 
 

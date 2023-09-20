@@ -5,6 +5,8 @@ from .models import ContactProfile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+from .models import BlogPost
+
 class ContactForm(forms.ModelForm):
 
 	name = forms.CharField(max_length=100, required=True,
@@ -30,6 +32,13 @@ class CreateUserForm(UserCreationForm):
 	class Meta:
 		model = User
 		fields = ['username','email','password1','password2']
+
+
+
+class BlogPostForm(forms.ModelForm):
+    class Meta:
+        model = BlogPost
+        fields = ('title', 'content')
 
 # class BLogForm(forms.ModelForm):
 

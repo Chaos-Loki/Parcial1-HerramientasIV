@@ -159,3 +159,12 @@ class Certificate(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+class BlogPost(models.Model):
+    title = models.CharField(max_length=200)
+    content = RichTextField()  # Utiliza RichTextField para el contenido del blog
+    # Otros campos del modelo si los tienes
+
+    def __str__(self):
+        return self.title
