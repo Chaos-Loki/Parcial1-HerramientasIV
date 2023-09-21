@@ -16,6 +16,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.views.decorators.cache import cache_control
+
 from django.urls import reverse
 
 #Funcion de Registro
