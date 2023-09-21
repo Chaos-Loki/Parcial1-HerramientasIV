@@ -45,7 +45,7 @@ Start Content
           {% if request.user.is_authenticated %}
             <h3 class="mdTitle"><a href="{% url 'main:blog-create' %}"> Click here to make a blog entry.</a></h3>  
           {% else %}
-            <h3 class="mdTitle"> <a href="main:login"> To submit a post, you must log in...</a> </h3>
+            <h3 class="mdTitle"> <a href="{% url 'main:login' %}"> To submit a post, you must log in...</a> </h3>
           {% endif %}
         </div>
       </div>

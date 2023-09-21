@@ -14,11 +14,5 @@ urlpatterns = [
 	path('portfolio/', views.PortfolioView.as_view(), name="portfolios"),
 	path('portfolio/<slug:slug>', views.PortfolioDetailView.as_view(), name="portfolio"),
 	path('blog/', views.BlogView.as_view(), name="blogs"),
-	path('blog/<slug:slug>', views.BlogDetailView.as_view(), name="blog"),
-    
-	path('crear-entrada/', views.crear_entrada_de_blog, name='crear_entrada_de_blog'),
-
-	
+	path('blog/<slug:slug>', views.BlogDetailView.as_view(), name="blog"),	
 	]
-
-    

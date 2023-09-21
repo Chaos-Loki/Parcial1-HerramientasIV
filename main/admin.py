@@ -7,9 +7,19 @@ from . models import (
     Portfolio,
     Blog,
     Certificate,
-    Skill
+    Skill,
     )
-
+# (
+#     UserProfile,
+#     ContactProfile,
+#     Testimonial,
+#     Media,
+#     Portfolio,
+#     Blog,
+#     Certificate,
+#     Skill,
+#     BlogPost
+#     )
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
@@ -44,3 +54,5 @@ class CertificateAdmin(admin.ModelAdmin):
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
     list_display = ('id','name','score')
+
+#admin.site.register(BlogPost)
