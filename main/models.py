@@ -116,7 +116,7 @@ class Portfolio(models.Model):
     def get_absolute_url(self):
         return f"/portfolio/{self.slug}"
 
-
+#SE USA ESTE, NO BLOGPOST
 class Blog(models.Model):
 
     class Meta:
@@ -130,7 +130,7 @@ class Blog(models.Model):
     description = models.CharField(max_length=500, blank=True, null=True)
     body = RichTextField(blank=True, null=True)
     slug = models.SlugField(null=True, blank=True)
-    image = models.ImageField(blank=True, null=True, upload_to="blog")
+    image = models.ImageField(upload_to="blog")
     is_active = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
@@ -159,3 +159,31 @@ class Certificate(models.Model):
 
     def __str__(self):
         return self.name
+    
+#EN REALIDAD NO SE NECESITA USAR UN BLOGPOST APARTE, SI TE DAS CUENTA
+#BLOG CONTIENE LAS PROPIEDADES QUE NECESITAMOS
+# class BlogPost(models.Model):
+#     class Meta:
+#         verbose_name_plural = 'Blog Profiles'
+#         verbose_name = 'Blog'
+#         ordering = ["timestamp"]
+    
+#     title = models.CharField(max_length=200)
+#     timestamp = models.DateTimeField(auto_now_add=True)
+#     author = models.CharField(max_length=200, blank=True, null=True)
+#     description = models.CharField(max_length=200, blank=True, null=True)
+#     body = RichTextField(blank=True, null=True)
+#     slug = models.SlugField(null=True, blank=True)
+#     image = models.ImageField(blank=True, null=True, upload_to="blog")
+#     is_active = models.BooleanField(default=True)
+
+#     def save(self, *args, **kwargs):
+#         if not self.id:
+#             self.slug = slugify(self.title)
+#         super(Blog, self).save(*args, **kwargs)
+
+#     def __str__(self):
+#         return self.title
+
+#     def get_absolute_url(self):
+#         return f"/blog/{self.slug}"

@@ -1,6 +1,7 @@
 from dataclasses import field, fields
 from django import forms
-from .models import ContactProfile
+from .models import ContactProfile, Blog
+#from .models import ContactProfile, BlogPost
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -31,20 +32,9 @@ class CreateUserForm(UserCreationForm):
 		model = User
 		fields = ['username','email','password1','password2']
 
-# class BLogForm(forms.ModelForm):
+class BlogPostForm(forms.ModelForm):
 
-# 	name = forms.CharField(max_length=150, required=True,
-# 		widget=forms.TextInput(attrs={
-# 			'placeholder': '*Titulo..',
-# 			}))
+	class Meta:
+		model = Blog
+		fields = ('author','name', 'image', 'description', 'body')
 
-# 	message = forms.CharField(max_length=1000, required=True, 
-# 		widget=forms.Textarea(attrs={
-# 			'placeholder': '*Message..',
-# 			'rows': 6,
-# 			}))
-
-
-# 	class Meta:
-# 		model = ContactProfile
-# 		fields = ('name', 'email', 'message',)

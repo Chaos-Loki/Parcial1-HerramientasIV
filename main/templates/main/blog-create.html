@@ -39,11 +39,22 @@ Start Content
           <div class="col-md-6">
             <div class="bannerContent">
               <h1 class="xlTitle pb-md-3">Start writing your post: </h1>
-            </div>
-            <hr>
-
+            </div>  
           </div>
         </div>
+        <hr>
+      <!-- AQUI EMPIEZA EL EDITOR -->
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        {{form.media}}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+        <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+        <script>
+        CKEDITOR.replace('id_content');
+        </script>
+
       </div>
     </div>
   </section>
