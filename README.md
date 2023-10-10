@@ -2,4 +2,3 @@
 Creación de un proyecto de DJango que permita la creación de posts de blogs
 por: Grupo Hellsing
 
-# Probando Rama

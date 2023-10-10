@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+  <h2>Lista de Categorías</h2>
+  <ul>
+    {% for categoria in categorias %}
+      <li>
+        <a href="{% url 'main:detalle_categoria' categoria.id %}">{{ categoria.nombre }}</a> -
+        Descripción: {{ categoria.descripcion }}
+      </li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'main:crear_categoria' %}">Agregar Categoría</a>
+{% endblock %}

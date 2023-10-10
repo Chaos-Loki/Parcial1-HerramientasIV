@@ -1,0 +1,11 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+  <h2>{% if categoria %}Editar Categoría{% else %}Crear Categoría{% endif %}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">{% if categoria %}Guardar Cambios{% else %}Crear Categoría{% endif %}</button>
+  </form>
+  <a href="{% url 'main:lista_categorias' %}">Volver a la lista de categorías</a>
+{% endblock %}

@@ -1,11 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import (
 		UserProfile,
 		Blog,
 		Portfolio,
 		Testimonial,
-		Certificate
+		Certificate,
+		Categoria,
+		Producto
 	)
 from django.views import generic
 from . forms import ContactForm, CreateUserForm, BlogPostForm
@@ -18,6 +20,9 @@ from django.shortcuts import redirect
 from django.views.decorators.cache import cache_control
 
 from django.urls import reverse
+
+
+from .forms import CategoriaForm, ProductoForm
 
 #Funcion de Registro
 def registerPage(request):
@@ -131,3 +136,81 @@ class BlogDetailView(generic.DetailView):
 
 
 
+#-------------------------------------------------------------
+
+#Lista de categorias
+def lista_categorias(request):
+    categorias = Categoria.objects.all()
+    return render(request, 'main/lista_categorias.html', {'categorias': categorias})
+
+#Vista de nueva categoria
+def crear_categoria(request):
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_categorias')  # Redirige a la lista de categorías después de crear una nueva
+    else:
+        form = CategoriaForm()
+    return render(request, 'main/crear_categoria.html', {'form': form})
+
+
+#Vista de Categoria Existente
+def editar_categoria(request, categoria_id):
+    categoria = get_object_or_404(Categoria, pk=categoria_id)
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST, instance=categoria)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_categorias')
+    else:
+        form = CategoriaForm(instance=categoria)
+    return render(request, 'main/editar_categoria.html', {'form': form, 'categoria': categoria})
+
+
+#Vista para eliminar una una categoria
+def eliminar_categoria(request, categoria_id):
+    categoria = get_object_or_404(Categoria, pk=categoria_id)
+    if request.method == 'POST':
+        categoria.delete()
+        return redirect('lista_categorias')
+    return render(request, 'main/confirmar_eliminar_categoria.html', {'categoria': categoria})
+
+
+#---------
+
+#Vista para crear producto
+def crear_producto(request):
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_productos')
+    else:
+        form = ProductoForm()
+    return render(request, 'main/crear_producto.html', {'form': form})
+
+#Vista para ver la lista de productos
+def lista_productos(request):
+    productos = Producto.objects.all()
+    return render(request, 'mani/lista_productos.html', {'productos': productos})
+
+#Vista para editar productos
+def editar_producto(request, producto_id):
+    producto = get_object_or_404(Producto, pk=producto_id)
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, request.FILES, instance=producto)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_productos')
+    else:
+        form = ProductoForm(instance=producto)
+    return render(request, 'main/editar_producto.html', {'form': form, 'producto': producto})
+
+#Vista para eliminar producto
+def eliminar_producto(request, producto_id):
+    producto = get_object_or_404(Producto, pk=producto_id)
+    if request.method == 'POST':
+        producto.delete()
+        return redirect('lista_productos')
+    return render(request, 'main/confirmar_eliminar_producto.html', {'producto': producto})
